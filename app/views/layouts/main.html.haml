@@ -9,15 +9,15 @@
       .navbar-inner
         .container
           %a.brand{href: "/"}
-            Dashboard
+            Issue Tracker
           %ul.nav
             %li
-              = link_to "Issues", "#"
+              = link_to "Issues", issues_path
             %li
               = link_to "New issue", new_issue_path
             %li
-              %form.navbar-search.pull-left
-                %input.search-query.span2{type: 'text', placeholder: "Search issues"}
+              = form_tag search_issues_path, class: "navbar-search pull-left" do
+                = text_field_tag :query, nil, placeholder: "Search issues", class: "search-query span2"
     .container
       - if flash[:notice]
         %p.text-info=flash[:notice]

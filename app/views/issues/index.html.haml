@@ -1,0 +1,14 @@
+%table.table
+  %thead
+    %tr
+      %th #
+      %th Title
+      %th State
+      %th Assignee
+  %tbody
+    - @issues.each_with_index do |issue, index|
+      %tr
+        %td= index
+        %td= issue.title
+        %td= issue.state
+        %td= issue.assigned_to.name
