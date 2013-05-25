@@ -3,7 +3,19 @@ class IssuesController < ActionController::Base
 
   # Actions with views
   def index
-    @issues = Issue.all
+    case params[:state]
+      when "new_unassigned"
+        @issues = Issue.opened.unassigned
+      when "opened"
+        @issued = Issue.opened.all
+      when "onhold"
+        @issues = Issue.onhold.all
+      when "closed"
+        @issues = Issue.closed.all
+      else
+        @issues = Issue.all
+    end
+    @issues ||= []
   end
 
   def new

@@ -12,7 +12,13 @@
             Issue Tracker
           %ul.nav
             %li
-              = link_to "Issues", issues_path
+              = link_to "New unassigned issues", issues_path(state: "new_unassigned")
+            %li
+              = link_to "Open issues", issues_path(state: "opened")
+            %li
+              = link_to "On hold issues", issues_path(state: "onhold")
+            %li
+              = link_to "Closed issues", issues_path(state: "closed")
             %li
               = link_to "New issue", new_issue_path
             %li
