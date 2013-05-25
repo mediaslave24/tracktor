@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(:version => 20130525160242) do
   create_table "issues", :force => true do |t|
     t.string   "title"
     t.text     "body"
-    t.integer  "assigned_to"
+    t.integer  "assignee_id"
     t.string   "customer_email"
     t.string   "customer_name"
     t.string   "state"

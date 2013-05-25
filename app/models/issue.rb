@@ -23,6 +23,8 @@ class Issue < ActiveRecord::Base
     record.state ||= STATES.first
   end
 
+  belongs_to :assignee, class_name: "Manager", foreign_key: "assignee_id"
+
   def assigned_to
     assignee = Object.new
     def assignee.to_s

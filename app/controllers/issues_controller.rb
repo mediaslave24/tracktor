@@ -41,22 +41,23 @@ class IssuesController < ActionController::Base
     @issue = Issue.new(params[:issue])
     if @issue.save
       IssueMailer.issue_received(@issue.customer_email).deliver
-      redirect_to @issue
+      redirect_to @issue, notice: "Issue has been created successfully"
     else
-      render :new
+      render :new, error: "Something went wrong"
     end
   end
 
   def delete
-    @issue = Issue.find(params[:id])
+    @issue = Issue.find(params[:id]).delete
+    redirect_to root_path, notice: "Issue has been deleted"
   end
 
   def change
     @issue = Issue.find(params[:id])
     if @issue.save
-      redirect_to @issue
+      redirect_to @issue, notice: "Issue has been updated"
     else
-      render :edit
+      render :edit, error: "Something went wrong"
     end
   end
 end
