@@ -1,0 +1,11 @@
+= content_for :pagetitle do
+  Issue ##{@issue.id}
+.row
+  .span3
+    %p{style: "margin-top:10.5px"} <b>Title:</b> #{@issue.title}
+    %p <b>Assignee:</b> #{@issue.assigned_to}
+  .span5
+    %h4 State: #{@issue.state.humanize}
+    %h4 Details:
+    .body
+      = simple_format @issue.body

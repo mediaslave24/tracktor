@@ -23,9 +23,9 @@
         %p.text-info=flash[:notice]
       - if flash[:error]
         %p.text-error=flash[:error]
+      - if yield :pagetitle
+        %h3.offset3=yield :pagetitle
       .row
-        - if yield :pagetitle
-          %h3.offset3=yield :pagetitle
         #content
           = yield
     = javascript_include_tag "application"

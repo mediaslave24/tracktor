@@ -23,7 +23,7 @@ class Issue < ActiveRecord::Base
 
   def assigned_to
     assignee = Object.new
-    def assignee.name
+    def assignee.to_s
       "joe"
     end
     assignee
