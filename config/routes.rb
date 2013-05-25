@@ -1,4 +1,5 @@
 Tracktor::Application.routes.draw do
+  root to: "dashboard#index"
   devise_for :managers
 
   # The priority is based upon order of creation:

@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %title Tracktor
+    = stylesheet_link_tag "application", media: "all"
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-static-top
+      .navbar-inner
+        .container
+          %a.brand{href: "/"}
+            Dashboard
+          %ul.nav
+            %li
+              %a{href: "#"} Issues
+            %li
+              %a{href: "#"} New Issue
+    .container
+      - if flash[:notice]
+        %p.text-info=flash[:notice]
+      - if flash[:error]
+        %p.text-error=flash[:error]
+      .row
+        #content
+          = yield
+    = javascript_include_tag "application"
