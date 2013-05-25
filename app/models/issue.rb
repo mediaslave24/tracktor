@@ -8,6 +8,8 @@ class Issue < ActiveRecord::Base
   scope :closed,     ->{ where(state: %w{ cancelled completed }) }
 
   validates_presence_of :body, :customer_email, :customer_name, :state, :title
+  validates_format_of :customer_email, with: /\w+@\w+\.\w+/
+  validates_length_of :customer_name, minimum: 4
 
   STATES = %w{
     waiting_for_staff
@@ -29,7 +31,10 @@ class Issue < ActiveRecord::Base
     assignee
   end
 
-  def search
-    []
+  def self.search(q)
+    where("title LIKE :query OR 
+           body LIKE :query OR 
+           customer_name LIKE :query OR
+           customer_email LIKE :query", query: "%#{q}%")
   end
 end

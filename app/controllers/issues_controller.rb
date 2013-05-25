@@ -25,6 +25,7 @@ class IssuesController < ActionController::Base
 
   def search
     @issues = Issue.search(params[:query])
+    render :index
   end
 
   def show
