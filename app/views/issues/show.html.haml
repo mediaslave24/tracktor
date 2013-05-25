@@ -9,5 +9,25 @@
     %h4 Details:
     .body
       = simple_format @issue.body
-    - if manager_signed_in?
-      %a{href: "javascript:void(0);"} Reply
+- if manager_signed_in?
+  .row
+    .span5.offset3
+      %h4 Update issue
+      = form_for @issue do |f|
+        %fieldset
+          = f.label :state
+          = f.select :state, f.object.class::STATES.map{|s|[s.humanize,s]}
+
+          = f.label :assignee
+          = f.select :assignee_id, f.object.class.reflections[:assignee].klass.all.map{|a| [a, a.id] if a.id != current_manager.id}.unshift(['Me', current_manager.id])
+
+          = label_tag "Comment"
+          = text_area_tag 'comment[body]', nil, rows: 6, class: "span5"
+
+        = f.submit "Send", class: 'btn btn-primary'
+.row
+  - @issue.comments.order('created_at DESC').each do |comment|
+    .comment
+      %p{style: 'margin-bottom:0'} <b>Author:</b> #{comment.author}
+      .body
+        = simple_format comment.to_s

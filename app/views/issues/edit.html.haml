@@ -1,0 +1,5 @@
+= form_for @issue do |f|
+  %fieldset
+    = f.label :body
+    = f.text_area :body, rows: 8, class: "span6"
+  = f.submit "Send"

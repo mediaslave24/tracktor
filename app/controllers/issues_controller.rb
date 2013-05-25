@@ -36,20 +36,6 @@ class IssuesController < ActionController::Base
     @issue = Issue.find(params[:id])
   end
 
-  def reply_form
-    @comment = Issue.find(params[:id]).new
-  end
-
-  # Actions without views
-  def reply
-    @comment = Issue.find(params[:id]).new(params[:comment])
-    @comment.author = current_user
-    if @comment.save
-      redirect_to @comment.issue
-    else
-      render :reply_form, error: "Something went wrong"
-    end
-  end
   def create
     @issue = Issue.new(params[:issue])
     if @issue.save
@@ -65,9 +51,14 @@ class IssuesController < ActionController::Base
     redirect_to root_path, notice: "Issue has been deleted"
   end
 
-  def change
+  def update
     @issue = Issue.find(params[:id])
-    if @issue.save
+    if @issue.update_attributes(params[:issue])
+      if params[:comment]
+        comment = @issue.comments.new(params[:comment]) if params[:comment]
+        comment.author = current_manager
+        comment.save
+      end
       redirect_to @issue, notice: "Issue has been updated"
     else
       render :edit, error: "Something went wrong"

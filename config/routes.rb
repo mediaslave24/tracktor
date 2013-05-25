@@ -1,10 +1,6 @@
 Tracktor::Application.routes.draw do
   root to: "issues#index"
   resources :issues do
-    member do
-      get "reply"
-      post "reply"
-    end
     collection do
       get "search"
     end

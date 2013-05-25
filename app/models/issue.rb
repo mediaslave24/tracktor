@@ -1,5 +1,5 @@
 class Issue < ActiveRecord::Base
-  attr_accessible :assigned_to, :body, :customer_email, :customer_name, :state, :title
+  attr_accessible :assignee_id, :body, :customer_email, :customer_name, :state, :title
   default_scope order('created_at DESC')
 
   scope :unassigned, ->{ where(assignee_id: nil) }
@@ -24,6 +24,7 @@ class Issue < ActiveRecord::Base
   end
 
   belongs_to :assignee, class_name: "Manager", foreign_key: "assignee_id"
+  has_many :comments
 
   def assigned_to
     assignee = Object.new
