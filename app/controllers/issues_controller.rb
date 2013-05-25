@@ -1,5 +1,5 @@
 class IssuesController < ActionController::Base
-  before_filter :authenticate_manager!, only: [:edit, :delete, :change]
+  before_filter :authenticate_manager!, only: [:edit, :delete, :change, :reply]
   layout 'main'
 
   # Actions with views
@@ -36,7 +36,20 @@ class IssuesController < ActionController::Base
     @issue = Issue.find(params[:id])
   end
 
+  def reply_form
+    @comment = Issue.find(params[:id]).new
+  end
+
   # Actions without views
+  def reply
+    @comment = Issue.find(params[:id]).new(params[:comment])
+    @comment.author = current_user
+    if @comment.save
+      redirect_to @comment.issue
+    else
+      render :reply_form, error: "Something went wrong"
+    end
+  end
   def create
     @issue = Issue.new(params[:issue])
     if @issue.save

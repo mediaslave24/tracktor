@@ -9,3 +9,5 @@
     %h4 Details:
     .body
       = simple_format @issue.body
+    - if manager_signed_in?
+      %a{href: "javascript:void(0);"} Reply
