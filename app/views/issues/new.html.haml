@@ -2,6 +2,11 @@
   Write new issue
 .span8.offset3
   = form_for @issue do |f|
+    - if @issue.errors.any?
+      %ul
+        - @issue.errors.full_messages.each do |msg|
+          %li.text-error=msg
+
     %fieldset
       = f.label :title
       = f.text_field :title, class: "span6"
