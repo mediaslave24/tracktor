@@ -1,4 +1,5 @@
 class IssuesController < ActionController::Base
+  before_filter :authenticate_manager!, only: [:edit, :delete, :change]
   layout 'main'
 
   # Actions with views
