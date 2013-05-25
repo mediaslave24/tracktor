@@ -2,7 +2,7 @@ class Issue < ActiveRecord::Base
   attr_accessible :assigned_to, :body, :customer_email, :customer_name, :state, :title
   default_scope order('created_at DESC')
 
-  scope :unassigned, ->{ where(assigned_to: nil) }
+  scope :unassigned, ->{ where(assignee_id: nil) }
   scope :onhold,     ->{ where(state: "onhold") }
   scope :opened,     ->{ where(state: %w{ onhold waiting_for_staff waiting_for_customer }) }
   scope :closed,     ->{ where(state: %w{ cancelled completed }) }
