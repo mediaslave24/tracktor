@@ -38,6 +38,7 @@ class IssuesController < ActionController::Base
   def create
     @issue = Issue.new(params[:issue])
     if @issue.save
+      IssueMailer.issue_received(@issue.customer_email).deliver
       redirect_to @issue
     else
       render :new
