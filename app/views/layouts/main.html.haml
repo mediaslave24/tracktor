@@ -12,9 +12,9 @@
             Dashboard
           %ul.nav
             %li
-              %a{href: "#"} Issues
+              = link_to "Issues", "#"
             %li
-              %a{href: "#"} New Issue
+              = link_to "New issue", new_issue_path
             %li
               %form.navbar-search.pull-left
                 %input.search-query.span2{type: 'text', placeholder: "Search issues"}
@@ -24,6 +24,8 @@
       - if flash[:error]
         %p.text-error=flash[:error]
       .row
+        - if yield :pagetitle
+          %h3.offset3=yield :pagetitle
         #content
           = yield
     = javascript_include_tag "application"

@@ -1,0 +1,18 @@
+- content_for :pagetitle do
+  Write new issue
+.span8.offset3
+  = form_for @issue do |f|
+    %fieldset
+      = f.label :title
+      = f.text_field :title, class: "span6"
+
+      = f.label :body
+      = f.text_area :body, class: "span6", rows: 8
+
+      = f.label "Your name"
+      = f.text_field :customer_name, class: "span6"
+
+      = f.label "Your email"
+      = f.text_field :customer_email, class: "span6"
+
+    = f.submit "Send", class: 'btn btn-primary offset2'
