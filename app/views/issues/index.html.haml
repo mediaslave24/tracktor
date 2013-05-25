@@ -1,4 +1,4 @@
-%table.table
+%table.table.table-hover
   %thead
     %tr
       %th #
@@ -9,6 +9,6 @@
     - @issues.each_with_index do |issue, index|
       %tr
         %td= index
-        %td= issue.title
-        %td= issue.state
+        %td= link_to issue.title, issue_path(issue)
+        %td= issue.state.humanize
         %td= issue.assigned_to.name
