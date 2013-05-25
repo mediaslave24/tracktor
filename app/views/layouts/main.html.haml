@@ -15,6 +15,9 @@
               %a{href: "#"} Issues
             %li
               %a{href: "#"} New Issue
+            %li
+              %form.navbar-search.pull-left
+                %input.search-query.span2{type: 'text', placeholder: "Search issues"}
     .container
       - if flash[:notice]
         %p.text-info=flash[:notice]
