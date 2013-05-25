@@ -59,6 +59,7 @@ class IssuesController < ActionController::Base
         comment.author = current_manager
         comment.save
       end
+      IssueMailer.issue_updated(@issue.customer_email, url_for(@issue)).deliver
       redirect_to @issue, notice: "Issue has been updated"
     else
       render :edit, error: "Something went wrong"
