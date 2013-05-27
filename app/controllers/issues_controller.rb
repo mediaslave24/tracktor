@@ -56,7 +56,7 @@ class IssuesController < ActionController::Base
     @issue = Issue.find(params[:id])
     if @issue.update_attributes(params[:issue])
       if params[:comment]
-        comment = @issue.comments.new(params[:comment]) if params[:comment]
+        comment = @issue.comments.new(params[:comment])
         comment.author = current_manager
         comment.save
       end
