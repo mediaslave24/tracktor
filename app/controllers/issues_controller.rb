@@ -42,7 +42,8 @@ class IssuesController < ActionController::Base
       IssueMailer.issue_received(@issue.customer_email).deliver
       redirect_to @issue, notice: "Issue has been created successfully"
     else
-      render :new, error: "Something went wrong"
+      flash[:error] = "Something went wrong"
+      render :new
     end
   end
 
@@ -62,7 +63,8 @@ class IssuesController < ActionController::Base
       IssueMailer.issue_updated(@issue.customer_email, url_for(@issue)).deliver
       redirect_to @issue, notice: "Issue has been updated"
     else
-      render :edit, error: "Something went wrong"
+      flash[:error] = "Something went wrong"
+      render :edit
     end
   end
 end
